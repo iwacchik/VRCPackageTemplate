@@ -41,13 +41,13 @@ jobs:
       # Move all files except .git and .github to Packages directory
       - name: Move all files to Packages
         run: |
-          mkdir -p Packages
+          mkdir -p Packages/"${{vars.PACKAGE_NAME}}"
           shopt -s extglob
-          mv !(Packages|.git|.github) Packages/
+          mv !(Packages|.git|.github) Packages/"${{vars.PACKAGE_NAME}}"
         
       # packagePath を Packages に変更
       - name: Change packagePath to Packages
-        run: echo "packagePath=Packages" >> $GITHUB_ENV
+        run: echo "packagePath=Packages/${{vars.PACKAGE_NAME}}" >> $GITHUB_ENV
 
       # Get the Package version based on the package.json file
       - name: Get Version
